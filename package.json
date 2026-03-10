@@ -1,0 +1,30 @@
+{
+  "name": "webp-converter",
+  "version": "1.0.0",
+  "description": "Local image-to-WebP converter with drag & drop, quality presets, and ZIP download",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "license": "MIT",
+  "author": "juaniandrada23",
+  "keywords": [
+    "webp",
+    "image-converter",
+    "sharp",
+    "node"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "compression": "^1.8.1",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.34.5",
+    "uuid": "^11.0.3"
+  }
+}

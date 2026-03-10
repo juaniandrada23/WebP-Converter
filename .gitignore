@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Temporary working directories (created automatically by the server)
+uploads/
+output/
+
+# Environment
+.env
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# AI artifacts
+.agent/
+.agents/
+.claude/
+skills-lock.json

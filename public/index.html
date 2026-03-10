@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebP Converter — Convert Images to WebP Online</title>
+  <meta name="description" content="Free online tool to convert images to WebP format. Supports JPG, PNG, GIF, TIFF, BMP, SVG, and AVIF.">
+  <meta property="og:title" content="WebP Converter — Convert Images to WebP Online">
+  <meta property="og:description" content="Free online tool to convert images to WebP format. Drag & drop, choose quality presets, and download as ZIP.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-text">
+        <h1 class="topbar-title">
+          <svg class="topbar-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span data-i18n="topbar.title">WebP Converter</span>
+        </h1>
+        <p class="topbar-subtitle" data-i18n="topbar.subtitle">Drop your images, get optimized WebP files</p>
+      </div>
+      <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.ariaLabel" aria-label="Language">
+        <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="panel">
+
+      <section class="phase phase-input">
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" data-i18n-attr="aria-label:dropzone.ariaLabel" aria-label="Upload images — drag and drop or press Enter to select files">
+          <div class="dropzone-content">
+            <div class="dropzone-icon-wrap">
+              <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="dropzone-text" data-i18n="dropzone.text">Drag & drop images here</p>
+            <p class="dropzone-hint" data-i18n="dropzone.hint">or click to select files</p>
+            <p class="dropzone-formats" data-i18n-html="dropzone.formats" data-i18n-vars='{"maxMB":"50 MB"}'>JPG, PNG, GIF, TIFF, BMP, SVG, AVIF, WebP &mdash; up to 50 MB each</p>
+          </div>
+          <input type="file" id="fileInput" multiple accept="image/*" hidden>
+        </div>
+
+        <div class="preview-grid" id="previewGrid"></div>
+      </section>
+
+      <section class="phase phase-config" id="controls" hidden>
+        <div class="config-bar">
+          <fieldset class="preset-selector">
+            <legend data-i18n="presets.legend">Quality Preset</legend>
+            <div class="preset-options" role="group" data-i18n-attr="aria-label:presets.legend" aria-label="Quality Preset">
+              <button class="preset-btn" data-preset="low"><span data-i18n="presets.low">Low</span><span data-i18n="presets.lowDesc">Smallest size</span></button>
+              <button class="preset-btn active" data-preset="medium"><span data-i18n="presets.medium">Medium</span><span data-i18n="presets.mediumDesc">Balanced</span></button>
+              <button class="preset-btn" data-preset="high"><span data-i18n="presets.high">High</span><span data-i18n="presets.highDesc">Best quality</span></button>
+            </div>
+          </fieldset>
+          <button class="btn btn-convert" id="convertBtn" data-i18n="convert.button">Convert All to WebP</button>
+        </div>
+      </section>
+
+      <section class="phase phase-output">
+        <div class="progress-section" id="progressSection" hidden aria-live="polite">
+          <div class="progress-header">
+            <span id="progressText" data-i18n="convert.converting">Converting...</span>
+            <span id="progressCount">0 / 0</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Conversion progress"></div>
+          </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" hidden aria-live="polite">
+          <div class="summary-cards" id="summaryCards">
+            <div class="summary-card">
+              <span class="summary-label" data-i18n="summary.filesConverted">Files Converted</span>
+              <span class="summary-value" id="summaryCount">0</span>
+            </div>
+            <div class="summary-card">
+              <span class="summary-label" data-i18n="summary.originalSize">Original Size</span>
+              <span class="summary-value" id="summaryOriginal">0 MB</span>
+            </div>
+            <div class="summary-card">
+              <span class="summary-label" data-i18n="summary.webpSize">WebP Size</span>
+              <span class="summary-value" id="summaryWebp">0 MB</span>
+            </div>
+            <div class="summary-card accent">
+              <span class="summary-label" data-i18n="summary.totalSaved">Total Saved</span>
+              <span class="summary-value" id="summarySaved">0%</span>
+            </div>
+          </div>
+
+          <div class="results-cards" id="resultsCards"></div>
+
+          <div class="table-wrapper">
+            <table class="results-table">
+              <caption class="sr-only" data-i18n="results.tableCaption">Conversion results per file</caption>
+              <thead>
+                <tr>
+                  <th data-i18n="results.file">File</th>
+                  <th data-i18n="results.original">Original</th>
+                  <th data-i18n="results.webp">WebP</th>
+                  <th data-i18n="results.saved">Saved</th>
+                  <th data-i18n="results.status">Status</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+
+          <div class="download-bar" id="downloadBar">
+            <button class="btn btn-download" id="downloadBtn" data-i18n-attr="aria-label:download.ariaLabel" aria-label="Download all converted files as ZIP">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span data-i18n="download.button">Download All as ZIP</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-text" data-i18n-html="footer.text">WebP Converter &mdash; local tool, nothing leaves your machine.</span>
+    <a class="footer-dev" href="https://github.com/juaniandrada23" target="_blank" rel="noopener noreferrer">
+      <svg class="footer-github" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      juaniandrada23
+    </a>
+  </footer>
+
+  <noscript><p>This app requires JavaScript to function.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
