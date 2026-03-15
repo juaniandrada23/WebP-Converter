@@ -27,4 +27,4 @@ function startAutoCleanup() {
   }, CLEANUP_INTERVAL_MS);
 }
 
-module.exports = { batchTimestamps, registerBatch, cleanupBatch, startAutoCleanup };
+module.exports = { registerBatch, cleanupBatch, startAutoCleanup };

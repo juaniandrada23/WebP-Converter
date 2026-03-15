@@ -18,11 +18,7 @@ export function t(key, vars) {
   return interpolate(val, vars);
 }
 
-export function getCurrentLang() {
-  return currentLang;
-}
-
-export function setLang(lang) {
+function setLang(lang) {
   if (!translations[lang]) return;
   currentLang = lang;
   localStorage.setItem('lang', lang);
