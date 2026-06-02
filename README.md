@@ -1,5 +1,10 @@
 # WebP Converter
 
+![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
+![sharp](https://img.shields.io/badge/sharp-image%20processing-99CC00)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
 Herramienta local para convertir imagenes a formato WebP. Arrastra tus imagenes, elige la calidad y descarga un ZIP con los archivos convertidos.
 
 Soporta JPG, PNG, GIF (animados incluidos), TIFF, BMP, SVG, AVIF y WebP. Hasta 50 archivos de 50 MB cada uno.
