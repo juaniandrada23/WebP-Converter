@@ -9,6 +9,17 @@ Herramienta local para convertir imagenes a formato WebP. Arrastra tus imagenes,
 
 Soporta JPG, PNG, GIF (animados incluidos), TIFF, BMP, SVG, AVIF y WebP. Hasta 50 archivos de 50 MB cada uno.
 
+## Tabla de contenidos
+
+- [Requisitos](#requisitos)
+- [Instalacion](#instalacion)
+- [Uso](#uso)
+- [Configuracion](#configuracion)
+- [Como funciona](#como-funciona)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Arquitectura](#arquitectura)
+- [Licencia](#licencia)
+
 ## Requisitos
 
 - [Node.js](https://nodejs.org/) v18 o superior
